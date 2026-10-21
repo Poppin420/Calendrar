@@ -1892,3 +1892,83 @@ summary {
   break-inside: avoid;
   margin: 8pt 0;
 }
+
+/* heatmap as a table */
+.heatmap-table {
+  border-collapse: separate;
+  border-spacing: 3px;
+  width: auto;
+}
+
+.heatmap-table th,
+.heatmap-table td {
+  border: 0;
+  padding: 0;
+}
+
+.heatmap-table .hm-col,
+.heatmap-table .hm-row,
+.heatmap-table .hm-corner {
+  background: transparent;
+  padding: var(--space-2);
+  white-space: normal;
+}
+
+.seq-0 {
+  background: var(--seq-0);
+  color: #0d1b2e;
+}
+.seq-1 {
+  background: var(--seq-1);
+  color: #0d1b2e;
+}
+.seq-2 {
+  background: var(--seq-2);
+  color: #0d1b2e;
+}
+.seq-3 {
+  background: var(--seq-3);
+  color: #0d1b2e;
+}
+.seq-4 {
+  background: var(--seq-4);
+  color: #ffffff;
+}
+.seq-5 {
+  background: var(--seq-5);
+  color: #ffffff;
+}
+.seq-6 {
+  background: var(--seq-6);
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .seq-0,
+:root[data-theme='dark'] .seq-1,
+:root[data-theme='dark'] .seq-2 {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .seq-3 {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .seq-4,
+:root[data-theme='dark'] .seq-5,
+:root[data-theme='dark'] .seq-6 {
+  color: #0d1b2e;
+}
+
+@media print {
+  .seq-0,
+  .seq-1,
+  .seq-2,
+  .seq-3 {
+    color: #0d1b2e !important;
+  }
+  .seq-4,
+  .seq-5,
+  .seq-6 {
+    color: #ffffff !important;
+  }
+}
