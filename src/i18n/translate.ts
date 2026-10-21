@@ -52,7 +52,7 @@ export function formatters(lang: Lang): Formatters {
             minimumFractionDigits: digits,
             maximumFractionDigits: digits,
             signDisplay: 'auto',
-          }).format(v * 100),
+          }).format(Math.abs(v * 100) < 0.5 * 10 ** -digits ? 0 : v * 100),
     num: (v, digits = 2) =>
       v === null || v === undefined || !Number.isFinite(v)
         ? dash

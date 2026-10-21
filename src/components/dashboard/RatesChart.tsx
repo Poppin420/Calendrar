@@ -12,7 +12,7 @@ import {
   type TooltipProps,
 } from 'recharts';
 import { useI18n } from '../../i18n';
-import type { RateRow } from './rates';
+import { niceTicks, type RateRow } from './rates';
 
 function RateTooltip({ active, payload }: TooltipProps<number, string>) {
   const { t, f } = useI18n();
@@ -63,12 +63,7 @@ export function RatesChart({
   const height = Math.max(140, rows.length * 44 + 56);
   const yWidth = Math.min(180, Math.max(70, longestLabel(rows) * 7.5 + 16));
   const maxUpper = Math.max(...rows.map((r) => r.upper), referenceValue ?? 0, 0.05);
-  const tickStep = maxUpper > 0.5 ? 0.2 : maxUpper > 0.2 ? 0.1 : 0.05;
-  const domainMax = Math.min(1, Math.ceil((maxUpper + 0.02) / tickStep) * tickStep);
-  const ticks = Array.from(
-    { length: Math.round(domainMax / tickStep) + 1 },
-    (_, i) => +(i * tickStep).toFixed(2),
-  );
+  const { ticks, domain } = niceTicks(Math.min(1, maxUpper * 1.05));
 
   const chart = (
     <BarChart
@@ -95,7 +90,7 @@ export function RatesChart({
       <CartesianGrid horizontal={false} stroke="var(--chart-grid)" />
       <XAxis
         type="number"
-        domain={[0, domainMax]}
+        domain={domain}
         ticks={ticks}
         tickFormatter={(v: number) => f.pct(v, 0)}
         stroke="var(--line-strong)"
