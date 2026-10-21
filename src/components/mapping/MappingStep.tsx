@@ -274,7 +274,11 @@ export function MappingStep() {
     () =>
       profiles.filter(
         (p) =>
-          (p.kind === 'binary' || p.kind === 'categorical' || p.kind === 'numeric') &&
+          (p.kind === 'binary' ||
+            p.kind === 'categorical' ||
+            p.kind === 'numeric' ||
+            p.kind === 'constant') &&
+          p.unique >= 1 &&
           p.unique <= 12,
       ),
     [profiles],
@@ -322,8 +326,8 @@ export function MappingStep() {
     if (favorable.length === 0) errs.push('mapping.errNoFavorable');
     if (
       decisionProfile &&
-      favorable.length >= decisionProfile.topValues.length &&
-      decisionProfile.unique <= 12
+      decisionProfile.unique >= 2 &&
+      favorable.length >= decisionProfile.topValues.length
     )
       errs.push('mapping.errAllFavorable');
     const chosen = sensitive.filter((s) => s.column);

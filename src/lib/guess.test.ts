@@ -18,6 +18,11 @@ describe('mapping guesses', () => {
     expect(guessSensitive(profiles, ['hired'])).toEqual(['gender']);
     expect(guessTruth(profiles, ['hired'])).toBe('actual_performance');
   });
+  it('still finds a decision column where everyone got the same outcome', () => {
+    expect(
+      guessDecision([profileColumn('sex', ['F', 'M']), profileColumn('hired', ['no', 'no'])]),
+    ).toBe('hired');
+  });
   it('handles 0/1 decisions', () => {
     expect(guessFavorable(profileColumn('y', ['0', '1', '0']))).toEqual(['1']);
   });

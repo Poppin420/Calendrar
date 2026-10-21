@@ -1643,6 +1643,10 @@ summary {
   list-style: none;
 }
 
+.toc li {
+  display: flex;
+}
+
 .toc a {
   display: inline-block;
   font-size: 0.875rem;
@@ -1886,6 +1890,26 @@ summary {
   color: #555d69;
   border-top: 0.75pt solid #d5d0c6;
   padding-top: 6pt;
+}
+
+.report .table-wrap {
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+}
+
+.report thead th {
+  white-space: normal;
+  font-size: 8pt;
+}
+
+.report td.num,
+.report th.num {
+  white-space: normal;
+}
+
+.report .verdict {
+  font-size: 8pt;
 }
 
 .report .chart-block {

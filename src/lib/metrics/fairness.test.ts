@@ -138,6 +138,13 @@ describe('demographicParity', () => {
     expect(r.verdict).toBe('concern');
   });
 
+  it('treats a gap that rounds to 10.0 points as within the threshold', () => {
+    // 0.6004 vs 0.5 → 10.04 points, displayed as "10.0"
+    const r = demographicParity([group('a', 15010, 25000), group('b', 12500, 25000)]);
+    expect(r.difference.value).toBeCloseTo(0.1004, 4);
+    expect(r.verdict).toBe('ok');
+  });
+
   it('is ok when the gap is within 10 points', () => {
     const r = demographicParity([group('a', 55, 100), group('b', 50, 100)]);
     expect(r.verdict).toBe('ok');

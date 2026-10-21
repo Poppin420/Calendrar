@@ -19,9 +19,14 @@ function usable(p: ColumnProfile) {
 
 export function guessDecision(profiles: readonly ColumnProfile[]): string | undefined {
   const binary = profiles.filter((p) => p.kind === 'binary');
+  // A single-valued column named like a decision is still the decision (all one class).
+  const constant = profiles.find(
+    (p) => p.kind === 'constant' && p.unique === 1 && DECISION.test(p.name),
+  );
   return (
     binary.find((p) => DECISION.test(p.name) && !TRUTH.test(p.name))?.name ??
     binary.filter((p) => !SENSITIVE.test(p.name)).at(-1)?.name ??
+    constant?.name ??
     binary.at(-1)?.name
   );
 }

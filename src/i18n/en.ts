@@ -362,6 +362,8 @@ export const en = {
     readingGuide:
       'How to read this report: “Possible problem” means the gap exceeds the threshold and is statistically clear. “Inconclusive” means the gap exceeds the threshold but could be chance. “Not enough data” means a group is too small.',
     page: 'Fairness Audit Playground',
+    valueCol: 'Gap / ratio',
+    verdictCol: 'Verdict',
   },
   errors: {
     title: 'Something went wrong',

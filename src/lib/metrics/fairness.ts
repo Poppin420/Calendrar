@@ -120,7 +120,9 @@ export function compareRate(
   } else {
     result.verdict = !ex.reliable
       ? 'insufficient'
-      : (difference.value ?? 0) <= threshold + 1e-12
+      : // Compare at the precision we display (0.1 percentage points) so the
+        // verdict never contradicts the number shown to the user.
+        Math.round((difference.value ?? 0) * 1000) / 1000 <= threshold + 1e-12
         ? 'ok'
         : clearGap
           ? 'concern'
